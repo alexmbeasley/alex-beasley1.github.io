@@ -102,7 +102,9 @@ function beginsWith(string, char) {
  */
 function endsWith(string, char) {
     // YOUR CODE BELOW HERE //
-
+    string = string.toLowerCase();
+    char = char.toLowerCase();
+    return string.slice(-1) === char;
 
 
     // YOUR CODE ABOVE HERE //
@@ -116,7 +118,7 @@ function endsWith(string, char) {
 function concat(stringOne, stringTwo) {
     // YOUR CODE BELOW HERE //
 
-
+    return stringOne + stringTwo;
 
     // YOUR CODE ABOVE HERE //
 }
@@ -134,7 +136,7 @@ function concat(stringOne, stringTwo) {
 function join(stringOne, stringTwo) {
     // YOUR CODE BELOW HERE //
     var args = Array.from(arguments);
-
+    return args.join('');
 
     // YOUR CODE ABOVE HERE //
 }
@@ -150,9 +152,15 @@ function join(stringOne, stringTwo) {
  */
 function longest(stringOne, stringTwo) {
     // YOUR CODE BELOW HERE //
-
-
-
+  
+    var long = '';
+    var strOne = stringOne.length;
+    var strTwo = stringTwo.length;
+   if(strOne > strTwo){
+      long = stringOne;
+   }else if (long = stringTwo);
+    return long
+  ;
     // YOUR CODE ABOVE HERE //
 }
 
@@ -166,8 +174,23 @@ function longest(stringOne, stringTwo) {
 function sortAscending(stringOne, stringTwo) {
     // YOUR CODE BELOW HERE //
 
-
-
+    for (let i = 0; i < stringOne.length && i < stringTwo.length; i++) {
+        if (stringOne[i] < stringTwo[i]) {
+          return 1;
+        } else if (stringOne[i] > stringTwo[i]) {
+          return -1;
+        }
+      }
+    
+      // If we get here, the two strings are equal up to the length of the shorter string
+      if (stringOne.length < stringTwo.length) {
+        return 1;
+      } else if (stringOne.length > stringTwo.length) {
+        return -1;
+      } else {
+        return 0;
+      }
+      
     // YOUR CODE ABOVE HERE //
 }
 
@@ -181,8 +204,22 @@ function sortAscending(stringOne, stringTwo) {
  */
 function sortDescending(stringOne, stringTwo) {
     // YOUR CODE BELOW HERE //
-
-
+    for (let i = 0; i < stringOne.length && i < stringTwo.length; i++) {
+        if (stringOne[i] > stringTwo[i]) {
+          return 1;
+        } else if (stringOne[i] < stringTwo[i]) {
+          return -1;
+        }
+      }
+    
+      // If we get here, the two strings are equal up to the length of the shorter string
+      if (stringOne.length > stringTwo.length) {
+        return 1;
+      } else if (stringOne.length < stringTwo.length) {
+        return -1;
+      } else {
+        return 0;
+      }
 
 
     // YOUR CODE ABOVE HERE //
