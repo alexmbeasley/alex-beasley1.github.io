@@ -22,7 +22,10 @@
 function reverseString(input) {
     // YOUR CODE GOES BELOW HERE //
     
-    
+    return input
+    .split('')
+    .reverse()
+    .join('');
     
     
     // YOUR CODE GOES ABOVE HERE //

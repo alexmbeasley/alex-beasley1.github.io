@@ -26,7 +26,7 @@ function length(string) {
  */
 function toLowerCase(string) {
     // YOUR CODE BELOW HERE //
-
+//return a new string but lower case
 return string.toLowerCase();
 
     // YOUR CODE ABOVE HERE //
@@ -37,7 +37,7 @@ return string.toLowerCase();
  */
 function toUpperCase(string) {
     // YOUR CODE BELOW HERE //
-
+//return a new string fored to upper case
 return string.toUpperCase();
 
     // YOUR CODE ABOVE HERE //
@@ -58,7 +58,7 @@ return string.toUpperCase();
  */
 function toDashCase(string) {
     // YOUR CODE BELOW HERE //
-
+//using the global replace, replace any space in the string with a - and make the string lower case
     return string.replace(/ /gi, '-').toLowerCase();
 
     // YOUR CODE ABOVE HERE //
@@ -78,9 +78,13 @@ function toDashCase(string) {
  */
 function beginsWith(string, char) {
     // YOUR CODE BELOW HERE //
-
+//using the input string and a single character, 
+//return a boolean value if the string beings or does not with the given parameters
+//force string to lower case
    string = string.toLowerCase();
+   //force char to lower case
    char = char.toLowerCase();
+   //compare first element of string
    return string[0] === char;
 
     // YOUR CODE ABOVE HERE //
@@ -102,8 +106,11 @@ function beginsWith(string, char) {
  */
 function endsWith(string, char) {
     // YOUR CODE BELOW HERE //
+    //use input string and given char to check if last character in string is same as given
+    //force both to lower case
     string = string.toLowerCase();
     char = char.toLowerCase();
+    //access last element in array and compare
     return string.slice(-1) === char;
 
 
@@ -117,7 +124,7 @@ function endsWith(string, char) {
  */
 function concat(stringOne, stringTwo) {
     // YOUR CODE BELOW HERE //
-
+    //use concat + to combine two strings
     return stringOne + stringTwo;
 
     // YOUR CODE ABOVE HERE //
@@ -135,6 +142,7 @@ function concat(stringOne, stringTwo) {
  */
 function join(stringOne, stringTwo) {
     // YOUR CODE BELOW HERE //
+    //return given number of strings joined together
     var args = Array.from(arguments);
     return args.join('');
 
@@ -152,13 +160,19 @@ function join(stringOne, stringTwo) {
  */
 function longest(stringOne, stringTwo) {
     // YOUR CODE BELOW HERE //
-  
+  //given two strings return the longest
+  //create empty var
     var long = '';
+    //create and assign new var for the length of each string
     var strOne = stringOne.length;
     var strTwo = stringTwo.length;
+    //compare which is longer by length
    if(strOne > strTwo){
+    //assign empty to var to longest
       long = stringOne;
+      //assign the second if the above is false
    }else if (long = stringTwo);
+   //return the new var
     return long
   ;
     // YOUR CODE ABOVE HERE //
@@ -173,24 +187,30 @@ function longest(stringOne, stringTwo) {
  */
 function sortAscending(stringOne, stringTwo) {
     // YOUR CODE BELOW HERE //
-
-    for (let i = 0; i < stringOne.length && i < stringTwo.length; i++) {
-        if (stringOne[i] < stringTwo[i]) {
-          return 1;
-        } else if (stringOne[i] > stringTwo[i]) {
-          return -1;
-        }
-      }
-    
-      // If we get here, the two strings are equal up to the length of the shorter string
-      if (stringOne.length < stringTwo.length) {
-        return 1;
-      } else if (stringOne.length > stringTwo.length) {
+//return 1, -1 or 0 if given strings are higher or lower in alaphbetical order
+//create a var for length and counting
+    var len = stringOne.length;
+    var i = 0;
+    //loop through the strings until the lenght is met
+    while( i < len )
+    {
+     //check if the strings are equal
+      if (stringOne.charAt(i) != stringTwo.charAt(i))
+      {
+        //check if the unicode vaule is less at each element
+        if ( stringOne.charAt(i) < stringTwo.charAt(i)) return 1;
+       
         return -1;
-      } else {
-        return 0;
       }
-      
+     
+      i++;
+    
+    }
+    
+   
+    return 0;
+    
+ 
     // YOUR CODE ABOVE HERE //
 }
 
@@ -204,23 +224,26 @@ function sortAscending(stringOne, stringTwo) {
  */
 function sortDescending(stringOne, stringTwo) {
     // YOUR CODE BELOW HERE //
-    for (let i = 0; i < stringOne.length && i < stringTwo.length; i++) {
-        if (stringOne[i] > stringTwo[i]) {
-          return 1;
-        } else if (stringOne[i] < stringTwo[i]) {
-          return -1;
-        }
-      }
+    var len = stringOne.length;
+    var i = 0;
     
-      // If we get here, the two strings are equal up to the length of the shorter string
-      if (stringOne.length > stringTwo.length) {
+    while( i < len )
+    {
+     
+      if (stringOne.charAt(i)!=stringTwo.charAt(i))
+      {
+    
+        if ( stringOne.charAt(i)<stringTwo.charAt(i)) return -1;
+       
         return 1;
-      } else if (stringOne.length < stringTwo.length) {
-        return -1;
-      } else {
-        return 0;
       }
-
+     
+      i++;
+    
+    }
+    
+   
+    return 0;
 
     // YOUR CODE ABOVE HERE //
 }
