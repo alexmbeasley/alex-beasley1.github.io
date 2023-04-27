@@ -14,7 +14,7 @@
  */
 function isArray(value) {
     // YOUR CODE BELOW HERE //
-    
+    //given input value test if array
     if (Array.isArray(value) === true){
         return true
     } else {
@@ -38,6 +38,7 @@ function isObject(value) {
     
     //tyepof value => 'object'
     if (typeof value === 'object'){
+        //need to test that its not an array, not a date and not null, return true if all test are true
         if(Array.isArray(value) !== true && value instanceof Date !== true && value !== null){
             return true;
         }
@@ -56,8 +57,9 @@ function isObject(value) {
  */
 function isCollection(value) {
     // YOUR CODE BELOW HERE //
-    
+    //need to test if not null and not ture, if it is return true
     if (value !== null && value instanceof Date !== true){
+        //need to test if its an array OR an object
         if(Array.isArray(value) === true || typeof value === 'object' ){
             return true;
         }
@@ -88,7 +90,7 @@ function isCollection(value) {
  */ 
 function typeOf(value) {
     // YOUR CODE BELOW HERE //
-    
+    //need to print whatever the value test is
     if(typeof value === 'string'){
         return 'string';
     } else if(Array.isArray(value)){

@@ -13,7 +13,7 @@
  */
 function createGreaterThanFilter(base) {
     // YOUR CODE BELOW HERE //
-    
+    //given a base input that could be string or number, create function that test if its greater than base
     return function(value) {
         return value > base;
     };
@@ -29,7 +29,7 @@ function createGreaterThanFilter(base) {
  */
 function createLessThanFilter(base) {
     // YOUR CODE BELOW HERE //
-    
+    //create a function that test if less
     return function(value) {
         return value < base;
     };
@@ -46,10 +46,15 @@ function createLessThanFilter(base) {
  */
 function createStartsWithFilter(startsWith) {
     // YOUR CODE BELOW HERE //
-    var lowerOne = startsWith.toLowerCase();
+    //create a function that test if a string starts with the given startswith single character
+    //need to change the case
+    startsWith = startsWith.toLowerCase();
+    //create function that checks the char
     return function(str){
-        var lowerTwo = str.toLowerCase();
-        return lowerTwo.charAt(0) === lowerOne;
+        //change string to lower
+        str= str.toLowerCase();
+        //check if the charat first element starts with the single char
+        return str.charAt(0) === startsWith;
        }
     // YOUR CODE ABOVE HERE //
 }
@@ -61,6 +66,7 @@ function createStartsWithFilter(startsWith) {
  */
 function createEndsWithFilter(endsWith) {
     // YOUR CODE BELOW HERE //
+    //same as above but need to analyze last element
     var oneTest = endsWith.toLowerCase();
     return function(str){
         var twoTest = str.toLowerCase();
@@ -80,9 +86,12 @@ function createEndsWithFilter(endsWith) {
  */
 function modifyStrings(strings, modify) {
     // YOUR CODE BELOW HERE //
-    
+    //given an array of strings and a funct that modifies them, return the array
+    //create array dump
   var newStr = [];
+  //loop through the string using the funct
   for (var i = 0; i < strings.length; i++){
+    //push into string dump using each string elememnt and the given funct
     newStr.push(modify(strings[i]));
   }
     return newStr;
@@ -102,8 +111,10 @@ function modifyStrings(strings, modify) {
  */
 function allStringsPass(strings, test) {
     // YOUR CODE BELOW HERE //
-    
+    //given array of strings and func which returns a true or false, return true if it is otherwise false
+    //loop through the given string
     for (var i = 0; i < strings.length; i++){
+        //test if each element in the string is true using the given funciton
         if(test(strings[i]) !== true){
             return false;
         }

@@ -23,11 +23,17 @@
  */
 function range(start, end) {
     // YOUR CODE GOES BELOW HERE //
+    //create a fun that takes two numbers as parm and returns an array with all in between nums
+    //if first is greater, return in reverese
+    //create array dump
     var result = [];
+    //check if first arg is less than second
     if (start <= end){
+        //create for to loop through numbers and store in array using .push
         for( var i = start; i <= end; i++){
             result.push(i);
         }
+        //create second loop for when first arg is greater
     }else {
         for(var i = start; i >= end; i--){
             result.push(i);
