@@ -19,7 +19,7 @@ animal.species = 'dog';
 
 //using bracket give animal prop name
 animal['name'] = 'Buffy';
-// using either give animal property nosises
+// using either notaation give animal property nosises
 animal.noises = [];
 
 console.log(animal);
@@ -27,13 +27,22 @@ console.log(animal);
 //////////////////////////////////////////////////////////////////////
 // Step 2 - Array Creation ///////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
+//create var named noises
 var noises = [];
+//using bracket give noises its first element
+//a string rep your animals sound
 noises[0] = 'Bark!';
+//using an array function add another sound
 noises.push('growl');
+//place element at beg of array
 noises.unshift('yawn');
+//using bracket place elemnt at end
 noises[noises.length] = 'sneeze';
+//log length of noises
 console.log(noises.length);
+//log last elemnt of noises
 console.log(noises.length - 1);
+//log the whole array
 console.log(noises);
 
 
@@ -41,8 +50,11 @@ console.log(noises);
 //////////////////////////////////////////////////////////////////////
 // Step 3 - Combining Step 1 and 2 ///////////////////////////////////
 //////////////////////////////////////////////////////////////////////
+//using bracket assing noises prop to animal to our noises array
 animal['noises'] = noises;
+//using another syntax add another noise
 animal.noises.push('fart');
+//log animal
 console.log(animal);
 
 
@@ -71,25 +83,30 @@ console.log(animal);
 //////////////////////////////////////////////////////////////////////
 // Step 6 - A Collection of Animals //////////////////////////////////
 //////////////////////////////////////////////////////////////////////
+//create var animals and assing it empty array
 var animals = [];
 
 //push animal to animals
 animals.push(animal);
+//log animals
+console.log(animals);
+//creat var called duck and assing it the given data
 var duck = { 
   species: 'duck', 
   name: 'Jerome', 
   noises: ['quack', 'honk', 'sneeze', 'woosh']
    };
-
+//push duck to animals
    animals.push(duck);
+   //log animals
    console.log(animals);
-
+//create two more animals with at least two sounds
 var cat = {
   species: 'cat',
   name: 'Louie',
   noises: ['meow', 'purr']
 };
-
+//add to aniamls array
 animals.push(cat);
 
 var cow = {
@@ -99,15 +116,19 @@ var cow = {
 };
 
 animals.push(cow);
+
+//console log animals and length of animals
+console.log(animals);
+console.log(animals.lenght);
 //////////////////////////////////////////////////////////////////////
 // Step 7 - Making Friends ///////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
 
 var friends = [];
-//easier to access 
+//easier to access the elements within an array
 
 //function called get random takes aniamls array and returns a random
-//index using
+//index using math random
 function getRandom(animals){
   return Math.floor(Math.random() * animals.length);
 }
@@ -116,6 +137,7 @@ function getRandom(animals){
 
 // get random animal
 var rando = animals[getRandom(animals)];
+//create var for rando element
 var randoName = rando.name;
 console.log(randoName);
 //add its name to friends array
