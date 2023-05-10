@@ -187,12 +187,17 @@ _.indexOf = function(array, value){
 */
 
 _.contains = function(array, value){
-    for (let i = 0; i < array.length; i++){
+    //set up test var starting at false
+    var testOne = false;
+    //iterate through the array
+    for (var i = 0; i < array.length; i++){
+        //if value is contained in array return true
         if (array[i] === value){
-            return true;
+            testOne = true;
         }
     }
-    return false; 
+    //using ternary check if no value is given otherwise return false
+    return value === undefined ? false : testOne;
 }
 
 
@@ -215,12 +220,13 @@ _.contains = function(array, value){
 _.each = function(collection, func){
     //determine if collection is array
     if (Array.isArray(collection)){
-        //iterate through collection
+        //iterate through collection if array 
         for (let i = 0; i < collection.length; i++){
             func(collection[i], i, collection);
         }
     }
     else {
+        //iterate through collection if ojbect
         for (let key in collection){
             func(collection[key], key, collection);
         }
@@ -240,6 +246,7 @@ _.each = function(collection, func){
 _.unique = function(array){
     var arr = [];
     for (var i = 0; i < array.length; i++){
+        //use indexof function from above to check if any of the elements of the given var have duplicate
         if(_.indexOf(arr, array[i]) === -1){
             arr.push(array[i]);
         }
@@ -267,6 +274,7 @@ _.filter = function(array, func){
 
     //iterate through array using each
     _.each(array, function(element, index, array){
+        //if any of the elements within array are true, push to storage array
         if (func(element, index, array)){
             arr.push(element);
         }
@@ -288,6 +296,19 @@ _.filter = function(array, func){
 *   _.reject([1,2,3,4,5], function(e){return e%2 === 0}) -> [1,3,5]
 */
 
+_.reject = function(array, func){
+    let arr = [];
+
+    //iterate through array using each
+    _.each(array, function(element, index, array){
+        //same as above but use the false returns
+        if (!func(element, index, array)){
+            arr.push(element);
+        }
+    });
+
+    return arr;
+}
 
 /** _.partition
 * Arguments:
@@ -308,6 +329,24 @@ _.filter = function(array, func){
 }
 */
 
+_.partition = function(array, func){
+    let arrTrue = [];
+    let arrFalse = [];
+
+    //iterate through array using each
+    _.each(array, function(element, index, array){
+        if (func(element, index, array)){
+            //same as reject and filter but pushing into different storage arrays
+            arrTrue.push(element);
+        }
+        else {
+            arrFalse.push(element);
+        }
+    });
+    //returns both values
+    return [arrTrue, arrFalse];
+    
+}
 
 /** _.map
 * Arguments:
@@ -324,7 +363,15 @@ _.filter = function(array, func){
 * Examples:
 *   _.map([1,2,3,4], function(e){return e * 2}) -> [2,4,6,8]
 */
-
+_.map = function(collection, func){
+    let mapVal = [];
+    //iterate through collection, if array or object
+    _.each(collection, function(value, key, collection){
+        //push into storage array the true values of array or object
+        mapVal.push(func(value, key, collection));
+    });
+    return mapVal;
+}
 
 /** _.pluck
 * Arguments:
@@ -337,6 +384,14 @@ _.filter = function(array, func){
 *   _.pluck([{a: "one"}, {a: "two"}], "a") -> ["one", "two"]
 */
 
+_.pluck = function(arrObject, property) {
+    //using map(each) you can iterate through the array
+    return _.map(arrObject, function(arrElement) {
+        //return array with array properties for every element
+        return arrElement[property];
+    });
+
+}
 
 /** _.every
 * Arguments:
@@ -358,6 +413,34 @@ _.filter = function(array, func){
 *   _.every([2,4,6], function(e){return e % 2 === 0}) -> true
 *   _.every([1,2,3], function(e){return e % 2 === 0}) -> false
 */
+_.every = function(collection, func){
+    //check for if it is provide, return true otherwise
+    if(func){
+        //loop through collection and if any element returns false, return false
+        for (let i = 0; i < collection.length; i++){
+            if(!func(collection[i], i, collection)) {
+                return false;
+            }
+        }
+        //loop through object and if any value returns false, return false
+        if (!Array.isArray(collection)) {
+            for (let key in collection) {
+              if (!func(collection[key], key, collection)) {
+                return false;
+              }
+            }
+          }
+        } 
+        //if a function is not provided, check if any of the array elements are true
+        else {
+        for (let i = 0; i < collection.length; i++){
+            if(!collection[i]) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
 
 
 /** _.some
@@ -380,6 +463,35 @@ _.filter = function(array, func){
 *   _.some([1,3,5], function(e){return e % 2 === 0}) -> false
 *   _.some([1,2,3], function(e){return e % 2 === 0}) -> true
 */
+_.some = function(collection, func){
+    
+        //check for if it is provide, return false otherwise
+        if(func){
+            //loop through collection and if any element returns true, return true
+            for (let i = 0; i < collection.length; i++){
+                if(func(collection[i], i, collection)) {
+                    return true;
+                }
+            }
+            //loop through object and if any value returns true, return true
+            if (!Array.isArray(collection)) {
+                for (let key in collection) {
+                  if (func(collection[key], key, collection)) {
+                    return true;
+                  }
+                }
+              }
+            } 
+            //if a function is not provided, check if any of the array elements are true
+            else {
+            for (let i = 0; i < collection.length; i++){
+                if(collection[i]) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
 
 /** _.reduce
@@ -400,7 +512,25 @@ _.filter = function(array, func){
 * Examples:
 *   _.reduce([1,2,3], function(previousSum, currentValue, currentIndex){ return previousSum + currentValue }, 0) -> 6
 */
+_.reduce = function (array, func, seed){
+    let result;
+    //determine if no seed was given
+    if(seed === undefined) {
+        //use first element of array as seed
+        result = array[0];
+        for (let i = 1; i < array.length; i++){
+            //reassing result to func invocation
+            result = func(result, array[i], i, array);
+        }
 
+    } else {
+        result = seed;
+        for( let i = 0; i < array.length; i++){
+            result = func(result, array[i], i, array);
+        }
+    }
+    return result; 
+}
 
 /** _.extend
 * Arguments:
@@ -416,6 +546,20 @@ _.filter = function(array, func){
 *   _.extend(data, {b:"two"}); -> data now equals {a:"one",b:"two"}
 *   _.extend(data, {a:"two"}); -> data now equals {a:"two"}
 */
+
+_.extend = function(obj1, ...objs){
+    for( let i = 0; i < objs.length; i++){
+        //loop through possilbe final object
+        //create obj variable to store final object element 
+        let obj = objs[i];
+        //set up for loop
+        for(let key in obj){
+            //set up objects to equal each other
+            obj1[key] = obj[key];
+        }
+    }
+    return obj1;
+}
 
 //////////////////////////////////////////////////////////////////////
 // DON'T REMOVE THIS CODE ////////////////////////////////////////////

@@ -22,11 +22,13 @@ function each(collection, action) {
     }
 }
 module.exports.each = each;
+
 /**
- * identity: Function takes in an input value and rturns value unchanged
+ * identity: Function takes in an input value and returns value unchanged
  * @param {Any value} value: Function takes in any data type
- * @returns {Any value} value: Function returns nput unchanged
+ * @returns {Any value} value: Function returns input unchanged
  */
+
 function identity(value){ 
     return value;
 }
@@ -41,3 +43,68 @@ module.exports.identity = identity;
  * 
  * 
  */
+
+function filter(array, func){
+    let arr = [];
+    _.each(array, function(element, index, array){
+        if(func(element, index, array)){
+            arr.push(element);
+        }
+    });
+    return arr;
+}
+module.exports.filter = filter;
+
+
+/**
+ * typeOf: function takes in a value and returns the data type as a string
+ * 
+ * @param {Any value} value: function takes in any data type
+ * @returns {Any value} value: function returns the data type
+ */
+
+function typeOf(value){
+    if(typeof value === 'object'){
+        if(value === null){
+            return 'null';
+        } else if(Array.isArray(value)){
+            return 'array';
+        } else {
+            return 'object';
+        }
+    }
+    else {
+        return typeof value;
+    }
+}
+module.exports.typeOf = typeOf;
+/**
+ * first: function takes in array and number, checks if its not an array
+ * , checks if its not a number, checks if it is negative,
+ * checks if it is greater than the given array length, otherwise returns first array element
+ * @param {Array} collection: takes in an array
+ * @param {Number} number: takes in a number to test
+ * @returns {Array} collection: returns a mutated array
+ */
+
+function first(array, number){
+
+    if(!Array.isArray(array)) {
+        return [];
+    }
+
+    if(typeof number !== 'number'){
+        return array[0];
+    }
+
+    if(number <= 0){
+        return [];
+    }
+
+    if(number > array.length){
+        return array; 
+    }
+    return array.slice(0, number);
+}
+
+module.exports.first = first;
