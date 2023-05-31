@@ -36,7 +36,18 @@
 // 1. Assignment Operators
 var x = 5;
 var y = 10;
+//addition
 x += y; // => 15
+//subtraction
+x -= y; // => -5
+//multiply
+x *= y; // => 50
+//divide
+y /= x; // => 2
+//remainder
+x %= y; // => 5
+//exponent
+x **=y; // => 9,765,625
 
 // 2. Arithmetic Operators
 var a = 10;

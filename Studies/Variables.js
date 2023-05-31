@@ -21,6 +21,17 @@
  //in the example below we delcared and assinged at the same time
 
  var myAge = 37;
+ console.log(myAge); // => 37
+ let city = "Memphis, TN";
+ console.log(city); // => Memphis, TN
+
+ // 1a. Reassignment: 
+ // we can reassign var and let with the = operator;
+
+ myAge = 35;
+ console.log(myAge); //var has been reassigned => 35
+ city = 'Nola';
+ console.log(city); //let has been reassigned => Nola
 
  // 2. var, let, const:
 

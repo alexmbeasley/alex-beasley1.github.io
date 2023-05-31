@@ -219,19 +219,15 @@ _.contains = function(array, value){
 
 _.each = function(collection, func){
     //determine if collection is array
-    if (Array.isArray(collection)){
-        //iterate through collection if array 
-        for (let i = 0; i < collection.length; i++){
-            func(collection[i], i, collection);
-        }
+   if(Array.isArray(collection)){
+    for(let i = 0; i < collection.length; i++){
+        func(collection[i], i, collection)
     }
-    else {
-        //iterate through collection if ojbect
-        for (let key in collection){
-            func(collection[key], key, collection);
-        }
-
+   } else{
+    for(let key in collection){
+        func(collection[key], key, collection)
     }
+   }
 }
 
 /** _.unique
@@ -268,18 +264,14 @@ _.unique = function(array){
 *   _.filter([1,2,3,4,5], function(x){return x%2 === 0}) -> [2,4]
 * Extra Credit:
 *   use _.each in your implementation
-*/
-_.filter = function(array, func){
+*/    
+_.filter = function (array, func){
     let arr = [];
-
-    //iterate through array using each
-    _.each(array, function(element, index, array){
-        //if any of the elements within array are true, push to storage array
-        if (func(element, index, array)){
-            arr.push(element);
+    for(let i = 0; i < array.length; i++){
+        if(func(array[i], i, array)){
+            arr.push(array[i]);
         }
-    });
-
+    }
     return arr;
 }
 
@@ -364,13 +356,17 @@ _.partition = function(array, func){
 *   _.map([1,2,3,4], function(e){return e * 2}) -> [2,4,6,8]
 */
 _.map = function(collection, func){
-    let mapVal = [];
-    //iterate through collection, if array or object
-    _.each(collection, function(value, key, collection){
-        //push into storage array the true values of array or object
-        mapVal.push(func(value, key, collection));
-    });
-    return mapVal;
+    let mapArr = [];
+    if(Array.isArray(collection)){
+        for(let i = 0; i < collection.length; i++){
+            mapArr.push(func(collection[i], i, collection))
+        }
+    } else{
+        for(let key in collection){
+            mapArr.push(func(collection[key], key, collection))
+        }
+    }
+    return mapArr;
 }
 
 /** _.pluck
@@ -513,23 +509,19 @@ _.some = function(collection, func){
 *   _.reduce([1,2,3], function(previousSum, currentValue, currentIndex){ return previousSum + currentValue }, 0) -> 6
 */
 _.reduce = function (array, func, seed){
-    let result;
-    //determine if no seed was given
-    if(seed === undefined) {
-        //use first element of array as seed
-        result = array[0];
-        for (let i = 1; i < array.length; i++){
-            //reassing result to func invocation
-            result = func(result, array[i], i, array);
+    let results;
+    if(seed === undefined){
+        results = array[0];
+        for(let i = 1; i < array.length; i++){
+            results = func(results, array[i], i, array)
         }
-
     } else {
-        result = seed;
-        for( let i = 0; i < array.length; i++){
-            result = func(result, array[i], i, array);
+        results = seed;
+        for(let i = 0; i < array.length; i++){
+            results = func(results, array[i], i, array)
         }
     }
-    return result; 
+    return results; 
 }
 
 /** _.extend

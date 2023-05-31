@@ -60,7 +60,7 @@ module.exports.filter = filter;
  * typeOf: function takes in a value and returns the data type as a string
  * 
  * @param {Any value} value: function takes in any data type
- * @returns {Any value} value: function returns the data type
+ * @returns { String }: Returns string of input value's datatype.
  */
 
 function typeOf(value){
@@ -79,13 +79,15 @@ function typeOf(value){
 }
 module.exports.typeOf = typeOf;
 /**
- * first: function takes in array and number, checks if its not an array
- * , checks if its not a number, checks if it is negative,
- * checks if it is greater than the given array length, 
- * otherwise returns first array element
+ * first: function takes in array and number,
+ * if the input collection is not an array, it returns an empty array
+ * if the input number is not a number, it returns the first element of the array
+ * if the input number is negative or zero, it returns an empty array
+ * if the input number is greater than the length of the array, it returns the orignal array
+ * otherwise it returns a new array containt the first x number of elements for the input array
  * @param {Array} collection: takes in an array
  * @param {Number} number: takes in a number to test
- * @returns {Array} collection: returns a mutated array
+ * @returns {Array} collection: returns a new array of the first x number of elements
  */
 
 function first(array, number){
@@ -110,13 +112,15 @@ function first(array, number){
 
 module.exports.first = first;
 /**
- * last: function takes in array and number, checks if its not an array
- * , checks if its not a number, checks if it is negative,
- * checks if it is greater than the given array length, 
- * otherwise returns last array element
+ * last: function takes in array and number,
+ * if the input collection is not an array, it returns an empty array
+ * if the input number is not a number, it returns the last element of the array
+ * if the input number is negative or zero, it returns an empty array
+ * if the input number is greater than the length of the array, it returns the orignal array
+ * otherwise it returns a new array containt the last x number of elements for the input array
  * @param {Array} collection: takes in an array
  * @param {Number} number: takes in a number to test
- * @returns {Array} collection: returns a mutated array
+ * @returns {Array} collection: returns a new array of the last x number of elements
  */
 _.last = function(array, number){
     
@@ -146,7 +150,7 @@ module.exports.last = last;
  * returns -1 if the value is not included 
  * @param {Array} collection: takes in an array
  * @param {Any Value} value: takes in any data type
- * @returns {Array} collection: returns a mutated array
+ * @returns {Number} value: either the index of the value in the array or -1
  */
 _.indexOf = function(array, value){
     for (let i = 0; i < array.length; i++){
@@ -277,11 +281,14 @@ _.map = function(collection, func){
 module.exports.map = map;
 
 /**
- * pluck: Function takes in an array of values and a property
- * calls the map function and returns the object with the given property included
- * @param {Object} collection: Function takes in object.
- * @param {property} value: object property
- * @returns {Array} collection: Function returns an output array of all items passed funciton test
+ * pluck: function takes inn an array of objects and a target property that exists in every
+ * object. It utilizes the map method to iterate over each object in the array and extracts
+ * the value of the specified property from each object. The function will return a new
+ * array containing only the extracted property values. 
+ * @param {Object} collection: Function takes in array of object.
+ * @param {property} value: object target property
+ * @returns {Array} collection: a new array containing the extracted property values from each obj
+ * 
  * 
  */
 
@@ -380,12 +387,16 @@ _.some = function(collection, func){
 module.exports.some = some;
 
 /**
- * reduce: function takes in an array, a test function and a seed start value. Reduce will call the function for every element, index and the orginal collection
- * and return a value based off the test. On the first iteration use seed as the previous result. If not seed is given, use the first element of the array
+ * reduce: function takes in an array, a test function and a seed start value. 
+ * Reduce will call the function for every element, index and the orginal collection
+ * and return a single value based off the test to be accumlated. On the first iteration use seed as 
+ * the previous result. If not seed is given, use the first element of the array
  * @param {Array} collection: takes in an array
- * @param {Function} test: Function takes in a function desinged to test each value in the array
- * @param {Seed Value} value: any simple data type
- * @returns {Any value} value: function returns the given seed value
+ * @param {Function} test: a function that is called for each element, index and 
+ * the collection. It should return a single value to be accumulated.
+ * @param {Seed Value} value: an initial value for the accumulator, if not provided 
+ * the first element of the array is used
+ * @returns {Any value} value: accumulated value based on the prevouis invocation of the callback func
  */
 _.reduce = function (array, func, seed){
     let result;
@@ -407,14 +418,15 @@ _.reduce = function (array, func, seed){
     return result; 
 }
 
-module.exports.result = result;
+module.exports.reduce = reduce;
 
 /**
- * extend: Designed to loop over a collection, Array or Object, and applies the 
- * action Function to each value in the collection.
- * 
- * @param {Object} collection: The collection over which to iterate.
- * @param {...Object} collection: Unkown amount of objects to test
+ * extend: function takes in a target object and one or more 'copyFrom' objects.
+ * It copies all the key/value pairs from the copyFrom objects into a target obj.
+ * The funciton then iterates over each copyFrom object and assigns its key/value pairs
+ * to the given keys in the target obj. 
+ * @param {Object} collection: The target object to which key/value pairs are will be copies
+ * @param {...Object} collection: one or more objects from which the key/value paris will be copied
  * @returns {Object} collection: returns a mutated object collection
  */
 
